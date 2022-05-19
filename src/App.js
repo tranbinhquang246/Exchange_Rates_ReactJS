@@ -2,14 +2,33 @@ import './App.css';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { HiSwitchHorizontal } from 'react-icons/hi';
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
+// import axios from 'axios'
 
 function App() {
+  // const [symbols, setSymbols] = useState('');
   const [amount, setAmount] = useState(1);
   const [from, setFrom] = useState('CUP');
   const [to, setTo] = useState('CUP');
   const [result, setResult] = useState('');
 
+
+//Free API limit reached.
+
+//   const fetchData = async() => {
+//     await axios.get('https://free.currconv.com/others/usage?apiKey=9ba5f064dc3d4e500552')
+//     .then(function (response) {
+//       console.log(response)
+//       // setSymbols(response)
+//     }).catch(function (error) {
+//       console.log(error);
+//     })
+// }
+
+  // useEffect (() => {
+  //   fetchData();
+  // },[])
+  
   const handleClickConvert = () => {
     if(from === "USD"){
       if(to === "VND"){
@@ -46,7 +65,7 @@ function App() {
     setTo(oldfrom);
   } 
 
-  const symbols = ['USD', 'VND', 'RUB']
+  const symbol = ['USD', 'VND', 'RUB']
   return (
     <div className="App bg-gradient-to-r from-slate-400  to-blue-400 w-screen h-screen
      flex flex-col items-center justify-center">
@@ -59,12 +78,12 @@ function App() {
             <div className="mb-4 flex justify-around w-full">
               <div className="mb-4 flex flex-col mt-2">
                 <label className="text-lg font-bold text-blue-800">From</label>
-                <Dropdown options={symbols} value={from} placeholder={'Select an option'} onChange={(e) => setFrom(e.value)}/>
+                <Dropdown options={symbol} value={from} placeholder={'Select an option'} onChange={(e) => setFrom(e.value)}/>
               </div>
               <HiSwitchHorizontal className="mt-10 bg-blue-600 rounded-lg w-7 h-7 cursor-pointer" onClick={() => handleClickSwitch()}/>
               <div className="mb-4 flex flex-col mt-2">
                 <label className="text-lg font-bold text-blue-800">To</label>
-                <Dropdown options={symbols} value={to} placeholder={'Select an option'} onChange={(e) => setTo(e.value)}/>
+                <Dropdown options={symbol} value={to} placeholder={'Select an option'} onChange={(e) => setTo(e.value)}/>
               </div>
             </div>
             <button className="mt-12 border rounded-xl  bg-blue-400 p-3" onClick={() => handleClickConvert()}>Convert</button>
